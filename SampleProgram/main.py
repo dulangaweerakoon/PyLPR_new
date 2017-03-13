@@ -8,28 +8,29 @@ import sys
 
 # This gets the Qt stuff
 import PyQt4
-from PyQt4.QtWidgets import *
+#from PyQt4.QtWidgets import *
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui, uic
 
 # This is our window from QtCreator
-import mainwindow_auto
+form_class = uic.loadUiType("mainwindow.ui")[0]
 
 from PyALPR import PlateReader
 
 # create class for our Raspberry Pi GUI
-class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
+class MainWindow(QtGui.QMainWindow, form_class):
     # access variables inside of the UI's file
 
     ### functions for the buttons to call
     def pressedOnButton(self):
-        print ("Pressed On!")
+        reader = PlateReader();
+        reader.read_plate();
+        self.LPRlabel.setText(reader.plate + "")
+        print (reader.plate + "")
         image = QtGui.QImage("alpr.jpg")
         self.imageLabel.setPixmap(QtGui.QPixmap.fromImage(image))
-        reader = PlateReader();
-	reader.read_plate();
-	self.LPRlabel.setText(reader.plate)
-
+        
+	
     def pressedOffButton(self):
         print ("Pressed Off!")
 
@@ -45,7 +46,7 @@ class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
 # I feel better having one of these
 def main():
     # a new app instance
-    app = QApplication(sys.argv)
+    app = QtGui.QApplication(sys.argv)
     form = MainWindow()
     form.show()
     # without this, the script exits immediately.
