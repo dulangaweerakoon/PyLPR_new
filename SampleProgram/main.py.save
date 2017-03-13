@@ -7,10 +7,10 @@
 import sys
 
 # This gets the Qt stuff
-import PyQt4
-from PyQt4.QtWidgets import *
+import PyQt5
+from PyQt5.QtWidgets import *
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 # This is our window from QtCreator
 import mainwindow_auto
@@ -26,9 +26,9 @@ class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
         print ("Pressed On!")
         image = QtGui.QImage("alpr.jpg")
         self.imageLabel.setPixmap(QtGui.QPixmap.fromImage(image))
-        reader = PlateReader();
-	reader.read_plate();
-	self.LPRlabel.setText(reader.plate)
+
+        plate_read = PlateReader();
+	plate_read.read_plate();
 
     def pressedOffButton(self):
         print ("Pressed Off!")

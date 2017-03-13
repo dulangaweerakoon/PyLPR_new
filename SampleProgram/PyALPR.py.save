@@ -46,17 +46,16 @@ class PlateReader:
 
         if not alpr_error is None:
             print alpr_error
-            return
+            return "Error"
 
         if alpr_json is None:
             print "No results!"
-            return
+            return "No Results"
 
         results = alpr_json["results"]
-	self.plate = results["plate"]
 	if len(results) == 0:
 		print "No Results"
-		return
+		return "No Results"
         ordinal = 0
         for result in results:
             candidates = result["candidates"]
@@ -67,8 +66,8 @@ class PlateReader:
                     print "Guess {0:d}: {1:s} {2:.2f}%".format(ordinal, candidate["plate"], candidate["confidence"])
 
 
-#if __name__=="__main__":
-#    plate_reader = PlateReader()
-#    plate_reader.read_plate()
+if __name__=="__main__":
+    plate_reader = PlateReader()
+    plate_reader.read_plate()
 
 
