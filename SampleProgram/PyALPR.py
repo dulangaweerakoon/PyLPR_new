@@ -53,10 +53,10 @@ class PlateReader:
             return
 
         results = alpr_json["results"]
-	self.plate = results["plate"]
-	if len(results) == 0:
-		print "No Results"
-		return
+		self.plate = results["plate"]
+		if len(results) == 0:
+			print "No Results"
+			return
         ordinal = 0
         for result in results:
             candidates = result["candidates"]

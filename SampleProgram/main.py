@@ -23,6 +23,7 @@ class MainWindow(QtGui.QMainWindow, form_class):
 
     ### functions for the buttons to call
     def pressedOnButton(self):
+        print "Pressed On!!"
         reader = PlateReader();
         reader.read_plate();
         self.LPRlabel.setText(reader.plate + "")
